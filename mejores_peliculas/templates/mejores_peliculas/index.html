@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{%load static%}
+
+{% block titulo %}{% endblock  %}
+{% block estilos %} {% endblock  %}
+
+{% block contenido %}
+    <div class="row">
+        <h1>Las 100 mejores peliculas de todos los tiempos </h1>
+        <h3><span class="badge bg-secondary">Por Alejandro Velasco</span></h3>
+        <p>
+            En el siguiente blog, haremos un repaso a traves de la historia del cine para determinar cuales 
+            son las 100 mejores peliculas de todos los tiempos.
+        </p>
+    </div>
+
+    <div class="row justify-content-center">
+        {% include "mejores_peliculas/block_peliculas.html" %}
+    </div>
+{% endblock  %}
