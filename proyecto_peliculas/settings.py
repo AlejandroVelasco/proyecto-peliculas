@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'mejores_peliculas',
+    'bootstrapform'
 ]
 
 MIDDLEWARE = [
@@ -77,14 +78,23 @@ WSGI_APPLICATION = 'proyecto_peliculas.wsgi.application'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+    # 'default': {
+    #     'ENGINE': 'django.db.backends.sqlite3',
+    #     'NAME': BASE_DIR / 'db.sqlite3',
+    # }
+    # configuring mysql database
+    'default' : {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'movies_db',
+        'USER': 'django',
+        'PASSWORD': 'Dj4ngo2023$',
+        'HOST': 'localhost',    
+        'PORT': '3306',
     }
 }
+    
 
-
-# Password validation
+# Password validation   
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
 
 AUTH_PASSWORD_VALIDATORS = [
@@ -103,6 +113,7 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 
+# Internationalization
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
 

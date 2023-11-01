@@ -1,5 +1,7 @@
 {% extends "base.html" %}
 {%load static%}
+{% load bootstrap %}
+
 
 {% block titulo %}{% endblock  %}
 {% block estilos %} {% endblock  %}
@@ -32,6 +34,35 @@
             {# <strong>Genero: </strong> {{movie.genero}} <br> #}
             <strong>Sinopis: </strong> {{movie.sinopsis}} <br>
         </p>
+        
+        </div>
+    </div>
+    <hr>
+    <div class="row mx-5 py-3">
+        <div class="col-12">
+            <h2>Comentarios</h2>
+
+            <div class="card my-3">
+                <div class="card-body ">
+                    <h5 class="card-title"></h5>
+                    <form action="">
+                        No hay comentarios.
+                    </form>
+                </div>
+            </div>            
+
+            <div class="card">
+                <div class="card-body ">
+                    <h5 class="card-title">Agregar comentario</h5>
+                    <hr>
+                    <form action="">
+                        {{ form_comentario|bootstrap }}
+                        <button class="btn btn-primary my-2 py-2">Guardar</button>
+                    </form>
+
+                </div>
+            </div>
+        
         </div>
     </div>
 {% endblock  %}

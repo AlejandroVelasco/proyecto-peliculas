@@ -1,4 +1,6 @@
 from django.shortcuts import render
+from .models import Pelicula, Director, Comentario
+from .forms import FormComentario
 
 movies = [
     {
@@ -10,7 +12,7 @@ movies = [
         'duracion': 175,    
         'quote': 'I\'m gonna make him an offer he can\'t refuse.',
         'imagen': 'mejores_peliculas/images/padrino.jpg',
-        'sinopsis': 'Don Vito Corleone (Marlon Brando) es el respetado y temido jefe de una de las cinco familias de la mafia de Nueva York. Tiene cuatro hijos: una chica, Connie (Talia Shire), y tres varones: el impulsivo Sonny (James Caan), el pusilánime Fredo (John Cazale) y Michael (Al Pacino), que no quiere saber nada de los negocios de su padre. Cuando Corleone, siempre aconsejado por su consejero Tom Hagen (Robert Duvall), se niega a intervenir en el negocio de las drogas, el jefe de otra banda ordena su asesinato. Empieza entonces una violenta y cruenta guerra entre las familias mafiosas.',
+        'sinopsis': 'Don Vito Corleone (Marlon Brando) es el respetado y temido jefe de una de las cinco familias de la mafia de Nueva York. Tiene cuatro hijos: una chica, Connie (Talia Shire), y tres varones: el impulsivo Sonny (James Caan), el pusilánime Fredo (John Cazale) y Michael (Al Pacino), que no quiere saber nada de los negocios de su padre. Cuando Corleone, siempre aconsejado por su consejero Tom Hagen (Robert Duvall), se niega a intervenir en el negocio de las drogas, el jefe de otra banda ordena su asesinato. Empieza entonces una violenta y cruenta guerra entre las familias mafiosas. Debut de Al Pacino en el cine. Obtuvo tres Oscar: mejor película, mejor actor (Marlon Brando) y mejor guión adaptado',
         'votos': 100
     },
     {
@@ -53,11 +55,11 @@ movies = [
 
 # Create your views here.
 def index(request):
+    movies = Pelicula.objects.all()
     return render(request, "mejores_peliculas/index.html", {'movies':movies})
 
+
 def detalle(request, id):    
-    movie = []
-    for m in movies:
-        if m.get("id") == id:
-            movie = m
-    return render(request, "mejores_peliculas/detalle.html", {"movie":movie})
+    movie = Pelicula.objects.get(pk=id)
+    return render(request, "mejores_peliculas/detalle.html", {"movie":movie, "form_comentario":FormComentario })
+
