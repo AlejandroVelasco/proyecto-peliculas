@@ -1,3 +1,4 @@
+from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from .models import Pelicula, Director, Comentario
 from .forms import FormComentario
@@ -61,5 +62,14 @@ def index(request):
 
 def detalle(request, id):    
     movie = Pelicula.objects.get(pk=id)
-    return render(request, "mejores_peliculas/detalle.html", {"movie":movie, "form_comentario":FormComentario })
+    comentarios = Comentario.objects.filter(post=id)
+    if request.method == 'POST':
+        comentario = Comentario()
+        comentario.nombre = request.POST['nombre']
+        comentario.correo = request.POST['correo']
+        comentario.comentario = request.POST['comentario']
+        comentario.post = movie
+        comentario.save()
+        return HttpResponseRedirect(request.path)
+    return render(request, "mejores_peliculas/detalle.html", {"movie":movie, "form_comentario":FormComentario, "comentarios": comentarios })
 

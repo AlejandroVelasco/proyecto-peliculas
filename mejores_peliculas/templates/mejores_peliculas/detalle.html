@@ -2,7 +2,6 @@
 {%load static%}
 {% load bootstrap %}
 
-
 {% block titulo %}{% endblock  %}
 {% block estilos %} {% endblock  %}
 
@@ -42,20 +41,33 @@
         <div class="col-12">
             <h2>Comentarios</h2>
 
-            <div class="card my-3">
-                <div class="card-body ">
-                    <h5 class="card-title"></h5>
-                    <form action="">
-                        No hay comentarios.
-                    </form>
-                </div>
-            </div>            
-
+            {% if comentarios  %}
+                {% for comentario in comentarios  %}
+                    <div class="card my-3">
+                        <div class="card-body ">
+                            <h5 class="card-title">{{comentario.nombre}} ({{comentario.correo}})</h5>
+                            <figure class="my-2">
+                                <blockquote class="blockquote">
+                                    <p><em>"{{comentario.comentario}}"</em></p>
+                                </blockquote>
+                            </figure>
+                        </div>
+                    </div>            
+                {% endfor %}
+            {% else %}
+                <div class="card my-3">
+                        <div class="card-body ">
+                            <h5 class="card-title"></h5>
+                            No hay comentarios.                         
+                        </div>
+                    </div>            
+            {% endif %}
+   
             <div class="card">
                 <div class="card-body ">
                     <h5 class="card-title">Agregar comentario</h5>
                     <hr>
-                    <form action="">
+                    <form action="" method="post">{% csrf_token %}
                         {{ form_comentario|bootstrap }}
                         <button class="btn btn-primary my-2 py-2">Guardar</button>
                     </form>
